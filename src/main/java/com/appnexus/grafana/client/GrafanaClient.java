@@ -22,6 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.List;
 import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
@@ -105,6 +106,25 @@ public class GrafanaClient {
   public DashboardMeta createDashboard(GrafanaDashboard grafanaDashboard)
       throws GrafanaException, IOException {
     return updateDashboard(grafanaDashboard);
+  }
+
+  /**
+   * import dashboard method (by shida)
+   *
+   * @param requestBody request body
+   * @return Meta information about the newly created dashboard
+   * @throws GrafanaException if Grafana returns an error when trying to create the dashboard.
+   * @throws IOException if a problem occurred talking to the server.
+   */
+  public DashboardMeta importDashboard(RequestBody requestBody)
+      throws GrafanaException, IOException {
+    Response<DashboardMeta> response = service.importDashboard(apiKey, requestBody).execute();
+
+    if (response.isSuccessful()) {
+      return response.body();
+    } else {
+      throw GrafanaException.withErrorBody(response.errorBody());
+    }
   }
 
   /**

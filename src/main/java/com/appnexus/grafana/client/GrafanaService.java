@@ -9,6 +9,7 @@ import com.appnexus.grafana.client.models.GrafanaDashboard;
 import com.appnexus.grafana.client.models.GrafanaMessage;
 import com.appnexus.grafana.client.models.GrafanaSearchResult;
 import java.util.List;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -35,6 +36,10 @@ public interface GrafanaService {
   @POST(GRAFANA_DASHBOARDS)
   Call<DashboardMeta> postDashboard(
       @Header(AUTHORIZATION) String authorization, @Body GrafanaDashboard dashboard);
+
+  @POST(GRAFANA_DASHBOARDS)
+  Call<DashboardMeta> importDashboard(
+      @Header(AUTHORIZATION) String authorization, @Body RequestBody requestBody);
 
   @DELETE(GRAFANA_DASHBOARDS + "{dashboard}")
   Call<DashboardSuccessfulDelete> deleteDashboard(

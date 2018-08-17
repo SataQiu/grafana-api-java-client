@@ -6,6 +6,8 @@ import okhttp3.ResponseBody;
 
 public class GrafanaException extends Exception {
 
+  private static final long serialVersionUID = 1L;
+
   public static GrafanaException withErrorBody(ResponseBody body) throws IOException {
     return body != null
         ? new GrafanaException("Unexpected Grafana error; " + body.string())

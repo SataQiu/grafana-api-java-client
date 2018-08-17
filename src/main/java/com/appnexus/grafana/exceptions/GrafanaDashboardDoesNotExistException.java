@@ -6,6 +6,8 @@ import okhttp3.ResponseBody;
 
 public class GrafanaDashboardDoesNotExistException extends GrafanaException {
 
+  private static final long serialVersionUID = 1L;
+
   public static GrafanaDashboardDoesNotExistException withErrorBody(ResponseBody body)
       throws IOException {
     return body != null

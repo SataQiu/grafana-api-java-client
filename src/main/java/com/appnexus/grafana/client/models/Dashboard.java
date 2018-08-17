@@ -9,6 +9,7 @@ import lombok.experimental.Accessors;
 @Accessors(fluent = true)
 public class Dashboard {
   Long id;
+  String uid;
   String title;
   List<DashboardRow> rows;
   Integer version;
